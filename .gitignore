@@ -1,0 +1,98 @@
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+.vscode/
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+# NuGet Packages
+*.nuget.cache
+*.dll
+*.exe
+*.pdb
+*.dll.config
+packages/
+project.lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+npm_cache/
+node_modules/
+
+# User-specific files
+*.user
+*.suo
+*.userprefs
+*.bak
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+build/
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Publish artifacts
+*.publish.xml
+*.publish/
+*.pubxml
+
+# Roslyn cache directories
+*.ide/
+*.RoslynCodeAnalysis.files/
+*.sln.docstates
+
+# Others
+*~
+*.[Pp]ublish.xml
+*.sw*
+*.swn
+*.swp
+*.bak
+*.bak.*
+*.~lock.*
+Thumbs.db
+*.cache
+*.tmp
+*.log
+*.vspscc
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.suo
+*.tlb
+*.tlh
+*.bak
+*.cache
+*.ilk
+*.log
+*.sbr
+*.scc
+*.pdb
+*.user
+*.usertype
+*.vspscc
+*.vssscc
+.builds
+*.dotCover
+.coverage
+*.csproj.user
+*.cache
+*.resharper
+*.rptproj.user
+.idea/
+.vs/

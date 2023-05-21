@@ -1,0 +1,13 @@
+﻿@page "/"
+
+@inject NavigationManager NavigationManager
+
+<PageTitle>Welcome</PageTitle>
+
+<h1>Welcome to TaskFlow</h1>
+
+<p>A task management application to help you stay organized</p>
+
+<p>
+    <a href="@NavigationManager.ToAbsoluteUri("/tasks")">Get Started</a>
+</p>
