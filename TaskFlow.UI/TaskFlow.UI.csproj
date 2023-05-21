@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Radzen.Blazor" Version="4.11.1" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="6.3.2" />
   </ItemGroup>
 
   <ItemGroup>

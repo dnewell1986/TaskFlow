@@ -1,22 +1,30 @@
 @page "/tasks"
 @using TaskFlow.Shared.Todos
 
+@inject TodoService TodoService
+
 <h1>Task List</h1>
 
-<RadzenDataGrid TItem="TodoDto" Data="@Tasks">
-    <Columns>
-        <RadzenDataGridColumn TItem="TodoDto" Property="Title" Title="Title" />
-        <RadzenDataGridColumn TItem="TodoDto" Property="Description" Title="Description" />
-        <RadzenDataGridColumn TItem="TodoDto" Property="DueDate" Title="Due Date" />
-        <RadzenDataGridColumn TItem="TodoDto" Property="Priority" Title="Priority" />
-    </Columns>
-</RadzenDataGrid>
+@if (Tasks is null){
+    <p>Loading...</p>
+}
+else
+{
+    <RadzenDataGrid TItem="TodoDto" Data="@Tasks">
+        <Columns>
+            <RadzenDataGridColumn TItem="TodoDto" Property="Title" Title="Title" />
+            <RadzenDataGridColumn TItem="TodoDto" Property="Description" Title="Description" />
+            <RadzenDataGridColumn TItem="TodoDto" Property="DueDate" Title="Due Date" />
+            <RadzenDataGridColumn TItem="TodoDto" Property="Priority" Title="Priority" />
+        </Columns>
+    </RadzenDataGrid>
+}
 
 @code {
-    List<TodoDto> Tasks { get; set; }
+    public List<TodoDto> Tasks { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Tasks = new();
+        Tasks = await TodoService.GetTodosAsync();
     }
 }

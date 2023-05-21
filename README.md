@@ -17,6 +17,7 @@ TaskFlow is a task management application built with Blazor and .NET WebAPI. It 
 -   .NET WebAPI: A framework for building HTTP-based APIs using .NET and C#.
 -   Entity Framework Core: A cross-platform ORM (Object-Relational Mapping) for .NET applications.
 -   SQLite: A lightweight, file-based database engine for development and testing purposes.
+-   Refit: A library for creating REST clients in .NET.
 
 ## Project Structure
 
