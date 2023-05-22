@@ -29,6 +29,9 @@ yarn-error.log*
 npm_cache/
 node_modules/
 
+# Ignore the default SQLite database.
+*.db*
+
 # User-specific files
 *.user
 *.suo

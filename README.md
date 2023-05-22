@@ -37,11 +37,18 @@ To get started with TaskFlow, follow these steps:
     git clone https://github.com/your-username/taskflow.git
     ```
 
-2. Build the solution using Visual Studio or the .Net CLI
+1. Build the solution using Visual Studio or the .Net CLI
     ```shell
     dotnet build
     ```
-3. Run the Blazor front-end and WebAPI back-end projects:
+1. Set up the database:
+    - Ensure you have SQLite installed on your machine.
+    - Open a terminal or command prompt and navigate to the `TaskFlow.WebAPI` project directory.
+    - Run the following command to apply the database migrations
+        ```shell
+        dotnet ef database update
+        ```
+1. Run the Blazor front-end and WebAPI back-end projects:
     - For the Blazor Server App (TaskFlow.UI):
         - Open the solution in Visual Studio
         - Set `TaskFlow.UI` as the startup project

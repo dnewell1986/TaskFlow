@@ -1,7 +1,7 @@
-namespace TaskFlow.WebAPI.Todos;
+namespace TaskFlow.WebAPI.Features.Todos;
 
 using TaskFlow.Shared;
-using TaskFlow.WebAPI.Users;
+using TaskFlow.WebAPI.Features.Users;
 
 public class Todo
 {

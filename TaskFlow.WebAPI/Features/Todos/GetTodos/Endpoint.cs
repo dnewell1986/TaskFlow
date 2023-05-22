@@ -1,9 +1,10 @@
-namespace TaskFlow.WebAPI.Todos.GetTodos;
+namespace TaskFlow.WebAPI.Features.Todos.GetTodos;
 
 using FastEndpoints;
 using TaskFlow.Shared.Todos;
+using TaskFlow.WebAPI.Features.Todos;
 
-public class Endpoint : EndpointWithoutRequest<List<TodoDto>, TodoMapper>
+public class Endpoint : EndpointWithoutRequest<List<TodoDto>, Mapper>
 {
     public override void Configure()
     {
@@ -11,7 +12,7 @@ public class Endpoint : EndpointWithoutRequest<List<TodoDto>, TodoMapper>
         AllowAnonymous();
     }
 
-    public override async Task HandleAsync(CancellationToken cancellationToken)
+    public override async Task HandleAsync(CancellationToken ct = default)
     {
         var todos = new List<Todo>()
         {
@@ -25,6 +26,6 @@ public class Endpoint : EndpointWithoutRequest<List<TodoDto>, TodoMapper>
             }
         };
 
-        await SendAsync(Map.FromEntity(todos), cancellation: cancellationToken);
+        await SendAsync(Map.FromEntity(todos), cancellation: ct);
     }
 }

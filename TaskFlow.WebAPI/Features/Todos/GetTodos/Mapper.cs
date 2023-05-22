@@ -1,10 +1,10 @@
-namespace TaskFlow.WebAPI.Todos.GetTodos;
+namespace TaskFlow.WebAPI.Features.Todos.GetTodos;
 
 using FastEndpoints;
 using TaskFlow.Shared.Todos;
-using TaskFlow.WebAPI.Todos;
+using TaskFlow.WebAPI.Features.Todos;
 
-public class TodoMapper : ResponseMapper<List<TodoDto>, List<Todo>>
+public class Mapper : ResponseMapper<List<TodoDto>, List<Todo>>
 {
     public override List<TodoDto> FromEntity(List<Todo> e) => e.Select(x => new TodoDto
     {
