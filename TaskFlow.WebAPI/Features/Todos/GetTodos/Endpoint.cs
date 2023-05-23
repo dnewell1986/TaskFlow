@@ -1,11 +1,16 @@
 namespace TaskFlow.WebAPI.Features.Todos.GetTodos;
 
 using FastEndpoints;
+using Microsoft.EntityFrameworkCore;
 using TaskFlow.Shared.Todos;
-using TaskFlow.WebAPI.Features.Todos;
+using TaskFlow.WebAPI.Data;
 
 public class Endpoint : EndpointWithoutRequest<List<TodoDto>, Mapper>
 {
+    private readonly AppDbContext _appDbContext;
+
+    public Endpoint(AppDbContext appDbContext) => _appDbContext = appDbContext;
+
     public override void Configure()
     {
         Get("/api/todos");
@@ -14,17 +19,7 @@ public class Endpoint : EndpointWithoutRequest<List<TodoDto>, Mapper>
 
     public override async Task HandleAsync(CancellationToken ct = default)
     {
-        var todos = new List<Todo>()
-        {
-            new Todo()
-            {
-                Id = Guid.NewGuid(),
-                Title = "Test Todo",
-                Description = "This is a test todo while setting up the API",
-                DueDate = DateTimeOffset.Now,
-                Priority = Shared.Priority.Medium
-            }
-        };
+        var todos = await _appDbContext.Todos.ToListAsync(ct);
 
         await SendAsync(Map.FromEntity(todos), cancellation: ct);
     }

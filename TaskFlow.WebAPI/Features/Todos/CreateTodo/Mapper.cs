@@ -10,8 +10,6 @@ public class Mapper : RequestMapper<TodoDto, Todo>
         Title = r.Title,
         Description = r.Description,
         DueDate = r.DueDate,
-        Priority = r.Priority,
-        CreatedByUserId = r.CreatedByUserId,
-        AssignedToUserId = r.AssignedToUserId
+        Priority = r.Priority
     };
 }

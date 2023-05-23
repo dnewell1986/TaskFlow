@@ -1,10 +1,14 @@
 namespace TaskFlow.WebAPI.Features.Todos.UpdateTodo;
 
 using FastEndpoints;
-using TaskFlow.Shared.Todos;
+using TaskFlow.WebAPI.Data;
 
-public class Endpoint : Endpoint<UpdateTodoRequest, TodoDto, Mapper>
+public class Endpoint : EndpointWithMapper<UpdateTodoRequest, Mapper>
 {
+    private readonly AppDbContext _appDbContext;
+
+    public Endpoint(AppDbContext appDbContext) => _appDbContext = appDbContext;
+
     public override void Configure()
     {
         Put("/api/todos/{Id}");
@@ -13,8 +17,26 @@ public class Endpoint : Endpoint<UpdateTodoRequest, TodoDto, Mapper>
 
     public override async Task HandleAsync(UpdateTodoRequest req, CancellationToken ct = default)
     {
-        var todo = Map.ToEntity(req);
+        if (req.Id != req.Todo.Id)
+        {
+            AddError("The id provided in the route must match the id of the object to be updated.");
+            await SendErrorsAsync(StatusCodes.Status400BadRequest, ct);
+        }
+        else
+        {
+            var todo = await _appDbContext.Todos.FindAsync(new object[] { req.Id }, ct);
+            if (todo is null)
+            {
+                await SendNotFoundAsync(ct);
+            }
+            else
+            {
+                var mappedTodo = Map.ToEntity(req);
+                _appDbContext.Update(mappedTodo);
+                await _appDbContext.SaveChangesAsync(ct);
 
-        await SendAsync(req.Todo, cancellation: ct);
+                await SendNoContentAsync(ct);
+            }
+        }
     }
 }

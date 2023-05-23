@@ -10,8 +10,8 @@ public class Todo
     public string Description { get; set; }
     public DateTimeOffset? DueDate { get; set; }
     public Priority Priority { get; set; }
-    public string CreatedByUserId { get; set; }
-    public User CreatedByUser { get; set; }
-    public string AssignedToUserId { get; set; }
-    public User AssignedToUser { get; set; }
+    //public string CreatedByUserId { get; set; }
+    //public User CreatedByUser { get; set; }
+    //public string AssignedToUserId { get; set; }
+    //public User AssignedToUser { get; set; }
 }
