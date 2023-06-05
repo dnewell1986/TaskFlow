@@ -2,6 +2,9 @@
 @using TaskFlow.Shared
 @using TaskFlow.Shared.Todos
 
+@inject NavigationManager NavigationManager
+@inject TodoService TodoService
+
 <h3>Add Todo</h3>
 
 <RadzenTemplateForm Data="@Todo" Submit="@(async (TodoDto todo) => { await HandleSubmitAsync(todo); })">
@@ -39,6 +42,10 @@
                     <RadzenDropDown Name="Priority" @bind-Value="Todo.Priority" Data="@priorityOptions" TextProperty="Value" ValueProperty="Key" />
                 </RadzenColumn>
             </RadzenRow>
+            <RadzenRow>
+                <RadzenButton ButtonType="ButtonType.Submit" Text="Create" Icon="add" />
+                <NavLink class="btn btn-secondary" href="/tasks">Cancel</NavLink>
+            </RadzenRow>
         </RadzenStack>
     </RadzenRow>
 </RadzenTemplateForm>
@@ -54,7 +61,8 @@
 
     public async Task HandleSubmitAsync(TodoDto todo)
     {
-
+        await TodoService.CreateTodoAsync(todo);
+        NavigationManager.NavigateTo("/tasks");
     }
 
     private List<KeyValuePair<Priority, string>> GetPriorityOptions()

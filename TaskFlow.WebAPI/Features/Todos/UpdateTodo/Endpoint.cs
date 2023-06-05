@@ -24,19 +24,11 @@ public class Endpoint : EndpointWithMapper<UpdateTodoRequest, Mapper>
         }
         else
         {
-            var todo = await _appDbContext.Todos.FindAsync(new object[] { req.Id }, ct);
-            if (todo is null)
-            {
-                await SendNotFoundAsync(ct);
-            }
-            else
-            {
-                var mappedTodo = Map.ToEntity(req);
-                _appDbContext.Update(mappedTodo);
-                await _appDbContext.SaveChangesAsync(ct);
+            var mappedTodo = Map.ToEntity(req);
+            _appDbContext.Update(mappedTodo);
+            await _appDbContext.SaveChangesAsync(ct);
 
-                await SendNoContentAsync(ct);
-            }
+            await SendNoContentAsync(ct);
         }
     }
 }

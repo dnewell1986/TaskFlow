@@ -1,10 +1,15 @@
-﻿namespace TaskFlow.Shared
+namespace TaskFlow.Shared;
+
+using System.Runtime.Serialization;
+
+public enum Priority
 {
-    public enum Priority
-    {
-        None = 0,
-        Low = 1,
-        Medium = 2,
-        High = 3
-    }
+    [EnumMember(Value = "None")]
+    None = 0,
+    [EnumMember(Value = "Low")]
+    Low = 1,
+    [EnumMember(Value = "Medium")]
+    Medium = 2,
+    [EnumMember(Value = "High")]
+    High = 3
 }
