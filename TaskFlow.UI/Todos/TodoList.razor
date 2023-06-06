@@ -1,6 +1,7 @@
 @page "/tasks"
 @using TaskFlow.Shared.Todos
 
+@inject NavigationManager NavigationManager
 @inject TodoService TodoService
 
 <h1>Task List</h1>
@@ -10,21 +11,49 @@
 }
 else
 {
-    <RadzenDataGrid TItem="TodoDto" Data="@Tasks">
+    <RadzenDataGrid @ref="taskGrid" TItem="TodoDto" Data="@Tasks">
         <Columns>
             <RadzenDataGridColumn TItem="TodoDto" Property="Title" Title="Title" />
             <RadzenDataGridColumn TItem="TodoDto" Property="Description" Title="Description" />
             <RadzenDataGridColumn TItem="TodoDto" Property="DueDate" Title="Due Date" />
             <RadzenDataGridColumn TItem="TodoDto" Property="Priority" Title="Priority" />
+            <RadzenDataGridColumn TItem="TodoDto" Title="Actions" Width="150px">
+                <Template Context="todo">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" Icon="mode_edit" Click="() => EditTodoItem(todo.Id)" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Click="async () => await DeleteTodoAsync(todo)" />
+                    </div>
+                </Template>
+            </RadzenDataGridColumn>
         </Columns>
     </RadzenDataGrid>
 }
 
 @code {
     public List<TodoDto> Tasks { get; set; }
+    public RadzenDataGrid<TodoDto> taskGrid = new();
 
     protected override async Task OnInitializedAsync()
     {
-        Tasks = await TodoService.GetTodosAsync();
+        Tasks = await LoadTasksAsync();
+    }
+
+    protected void EditTodoItem(Guid todoId)
+    {
+        NavigationManager.NavigateTo($"/tasks/edit/{todoId}");
+    }
+
+    async Task DeleteTodoAsync(TodoDto todo)
+    {
+        await TodoService.DeleteTodoAsync(todo.Id);
+        Tasks.Remove(todo);
+
+        await taskGrid.Reload();
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task<List<TodoDto>> LoadTasksAsync()
+    {
+        return await TodoService.GetTodosAsync();
     }
 }

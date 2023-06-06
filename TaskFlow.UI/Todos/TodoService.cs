@@ -16,6 +16,9 @@ public interface ITodoApi
 
     [Put("/api/todos/{id}")]
     Task UpdateTodoAsync(Guid id, [Body] UpdateTodoRequest request);
+
+    [Delete("/api/todos/{id}")]
+    Task DeleteTodoAsync(Guid id);
 }
 
 public class TodoService
@@ -78,6 +81,19 @@ public class TodoService
         catch (ApiException ex)
         {
             _logger.LogError(ex, "Error updating todo: {ErrorMessage}", ex.Message);
+            throw;
+        }
+    }
+
+    public async Task DeleteTodoAsync(Guid id)
+    {
+        try
+        {
+            await _todoApi.DeleteTodoAsync(id);
+        }
+        catch (ApiException ex)
+        {
+            _logger.LogError(ex, "Error deleting todo: {ErrorMessage}", ex.Message);
             throw;
         }
     }

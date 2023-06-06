@@ -1,12 +1,23 @@
-﻿@page "/"
-
+@page "/"
 @inject NavigationManager NavigationManager
 
 <PageTitle>Welcome</PageTitle>
 
-<h1>Welcome to TaskFlow</h1>
+<h3>Welcome to TaskFlow</h3>
 
-<p>A task management application to help you stay organized</p>
+<p>TaskFlow is a task management application that helps you stay organized and productive.</p>
+
+<img src="~/images/taskflow.jpg" alt="TaskFlow" style="max-width: 400px; margin-top: 20px;">
+
+<p>With TaskFlow, you can:</p>
+<ul>
+    <li>Create tasks with a title, description, due date, and priority.</li>
+    <li>View, edit, and delete tasks.</li>
+    <li>Assign tasks to specific users.</li>
+    <li>Search and filter tasks based on various criteria.</li>
+</ul>
+
+<p>TaskFlow provides a user-friendly interface for managing tasks efficiently, helping you stay on top of your work and meet your deadlines.</p>
 
 <p>
     <a href="@NavigationManager.ToAbsoluteUri("/tasks")">Get Started</a>

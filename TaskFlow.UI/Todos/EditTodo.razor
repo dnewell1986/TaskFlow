@@ -85,7 +85,7 @@ else
     public async Task HandleSubmitAsync(TodoDto todo)
     {
         await TodoService.UpdateTodoAsync(todo);
-        //NavigationManager.NavigateTo("/tasks");
+        NavigationManager.NavigateTo("/tasks");
     }
 
     private List<KeyValuePair<Priority, string>> GetPriorityOptions()
